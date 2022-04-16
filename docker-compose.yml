@@ -1,0 +1,49 @@
+version: "3.4"
+
+services:
+
+  nestjs:
+    container_name: ${APP_CONTAINER_NAME:-nestjs}
+    build: 
+      context: ./Docker
+      dockerfile: Dockerfile
+      args:
+        MAIL: 'demo@demo.fr'
+        NAME: 'demo demo'
+        WORKINGDIR: ${WORKINGDIR:-/app}
+        CURRENT_PATH: ${PWD}
+    image: nestjs
+    ports:
+      - ${FORWARD_APP_PORT:-3000}:${FORWARD_APP_PORT:-3000}
+    command: tail -f /dev/null
+    restart: unless-stopped
+    volumes:
+      - ./app:/app
+      - ./.env:/env/.env
+    networks:
+      - app_meteo_network
+
+  database_postgres:
+    container_name: ${DB_CONTAINER_NAME:-database}
+    image: ${DB_APP:-postgres:alpine3.15}
+    ports:
+      - ${FORWARD_APP_DB_PORT:-5432}:5432
+    environment:
+      POSTGRES_DB: ${DB_DATABASE_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      # PG_DATA: /var/lib/postgresql/data
+    restart: unless-stopped
+    volumes:
+      - volume_db_app_meteo:/var/lib/postgresql/data
+    networks:
+      - app_meteo_network
+
+volumes:
+  volume_db_app_meteo:
+    driver: local
+
+networks:
+  app_meteo_network:
+    driver: bridge
+    name: app_meteo_network 
