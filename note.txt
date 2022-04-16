@@ -1,6 +1,0 @@
-//Add this later
-"start:dev": "nodemon --config nodemon.json",
-
-----+-----------+----------+-----------+---------
-  1 | Paris     | 8.8717   | 2.3186    | France
-  2 | Montgeron | 2.453290 | 48.707670 | France
