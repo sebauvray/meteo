@@ -25,14 +25,18 @@ services:
 
   database_postgres:
     container_name: ${DB_CONTAINER_NAME:-database}
-    image: ${DB_APP:-postgres:alpine3.15}
+    build: 
+      context: ./Docker
+      dockerfile: DockerfilePostgres
+      args:
+        DUMP: ${DUMP}
+    image: postgres_meteo
     ports:
       - ${FORWARD_APP_DB_PORT:-5432}:5432
     environment:
       POSTGRES_DB: ${DB_DATABASE_NAME}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      # PG_DATA: /var/lib/postgresql/data
     restart: unless-stopped
     volumes:
       - volume_db_app_meteo:/var/lib/postgresql/data

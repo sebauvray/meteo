@@ -1,0 +1,3 @@
+FROM postgres:alpine3.15
+
+ADD ./dump_meteo_database.sql /docker-entrypoint-initdb.d
