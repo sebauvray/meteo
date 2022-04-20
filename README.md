@@ -35,10 +35,16 @@ docker-compose up -d
 docker exec -it nestjs npm install
 ```
 
-### 4- Démarrage du projet
+### 4- Démarrage du back
 
 ```bash
 docker exec -it nestjs nest start
+```
+
+### 4- Démarrage du front
+
+```bash
+docker exec -it react npm start
 ```
 
 :warning: Pour des installation custom, il faut modifier le fichier d'environnement.
