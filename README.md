@@ -35,6 +35,12 @@ docker-compose up -d
 docker exec -it nestjs npm install
 ```
 
+### 4- Démarrage du projet
+
+```bash
+docker exec -it nestjs nest start
+```
+
 :warning: Pour des installation custom, il faut modifier le fichier d'environnement.
 
 
