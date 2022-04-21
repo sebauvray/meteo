@@ -44,6 +44,7 @@ docker exec -it nestjs nest start
 ### 4- Démarrage du front
 
 ```bash
+docker exec -it react npm install
 docker exec -it react npm start
 ```
 
