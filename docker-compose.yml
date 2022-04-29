@@ -40,7 +40,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./front:/app
-      - ./Docker/env_react:/app/.env
+      - ./.env:/app/.env
     networks:
       - app_meteo_network
 
